@@ -44,7 +44,7 @@ Each Campground has:
  </nav>
  ```
 
-* Style the new camground form
+* Style the new camground form (inline sytling is just a temp. method)
 
 ```
 <div class="container">
@@ -67,3 +67,26 @@ Each Campground has:
     </div>
 </div>
 ```
+
+## Add Mongoose
+* Install and configure mongoose
+* Setting Database (MongoDB):
+To install MongoDB in your workspace, you can open a terminal and run the following command:
+```
+sudo apt-get install -y mongodb-org
+
+```
+* Running MongoDB on a Cloud9 workspace
+```
+$ mkdir data
+$ echo 'mongod --bind_ip=$IP --dbpath=data --nojournal --rest "$@"' > mongod
+$ chmod a+x mongod
+```
+
+* You can start mongodb by running the mongod script on your project root:
+```
+$ ./mongod 
+```
+
+* Setup campground model
+* Use campground model inside of our routes
