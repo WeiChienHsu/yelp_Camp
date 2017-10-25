@@ -1,11 +1,23 @@
 {
-  "name": "yelp_camp",
+  "name": "v1",
   "version": "1.0.0",
-  "description": "",
+  "description": "YelpCamp v1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "WeiChien Hsu",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WeiChienHsu/yelp_Camp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WeiChienHsu/yelp_Camp/issues"
+  },
+  "homepage": "https://github.com/WeiChienHsu/yelp_Camp#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
 }
