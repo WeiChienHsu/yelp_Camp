@@ -12,6 +12,10 @@ app.get("/",function(req, res){
    var campgrounds = [
        {name:"YinMing Mountain", image:"https://photosforclass.com/download/5641024448"},
        {name:"Creep Mountain", image:"https://photosforclass.com/download/14435096036"},
+       {name:"YinMing Mountain", image:"https://photosforclass.com/download/5641024448"},
+       {name:"Creep Mountain", image:"https://photosforclass.com/download/14435096036"},
+       {name:"YinMing Mountain", image:"https://photosforclass.com/download/5641024448"},
+       {name:"Creep Mountain", image:"https://photosforclass.com/download/14435096036"},
        {name:"Camping Paradas", image:"https://photosforclass.com/download/15989950903"}
        ];
 ///
