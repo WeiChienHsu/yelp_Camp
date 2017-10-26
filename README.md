@@ -135,6 +135,32 @@ app.post("/campgrounds",function(req, res){
 ```
 ## Show Page
 * Review the RESTful routes I've created so far
+* NEW/CREATE/SHOW/EDIT/UPDATE/DESTORY
 * Add description to my campground model
-* Show db.collection.drop()
-* Add a show route/template
+```
+var campgroundSchema = new mongoose.Schema({
+    name:String,
+    image:String,
+    description:String
+});
+```
+* Show db.collection.drop() - if you made a huge change
+* Add a show route/template // findById()
+```
+app.get("/campgrounds/:id",function(req, res){
+
+    Campground.findById(req.params.id, function(err, foundCampground){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("show", {campground: foundCampground});
+            }
+    });
+});
+```
+* Give an ancher tag in the index page
+```
+ <p>
+     <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary" > More Info</a>
+ </p>
+```
