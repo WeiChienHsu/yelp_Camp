@@ -86,6 +86,10 @@ $ chmod a+x mongod
 ```
 $ ./mongod 
 ```
+* IF you accidiently shutdown mongoDB and face the "Unclean shutdown detected" problem:
+```
+killall mongod ; cd ; ./mongod --repair ; cd data ; rm -rf mongod.lock ; cd ; ./mongod
+```
 * Setup campground model
 ```
 var campgroundSchema = new mongoose.Schema({
