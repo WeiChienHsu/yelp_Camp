@@ -304,8 +304,73 @@ NEW    /campgrounds/new
 CREATE /campgrounds
 SHOW   /campgrounds/:id
 
-NEW    /comments/new   GET
-CREATE /comments       POST
+NEW    /campgrounds/:id/comments/new   GET
+CREATE /campgrounds/:id/comments       POST
 ```
 * Add the Comment NEW and CREATE routes
+```
+ app.get("/campgrounds/:id/comments/new",function(req, res){
+    Campground.findById(req.params.id, function(err, campground){
+        if(!err){
+            res.render("comments/new",{campground,campground});
+        }
+    });
+});
+ 
+```
+* Lookup Campground using ID -> Create new comment -> Connect new comment to Campground -> Redirect to campgournd show page
+```
+app.post("/campgrounds/:id/comments", function(req, res){
+    Campground.findById(req.params.id, function(err, campground){
+        if(err){
+            console.log(err);
+            res.redirect("/campgrounds");
+        } else{
+            Comment.create(req.body.comment,function(err, comment){
+                if(err){
+                    console.log(err);
+                } else {
+                    campground.comments.push(comment);
+                    campground.save();
+                    res.redirect("/campgrounds/" + campground._id);
+                }
+            });
+        }
+    });
+});
+
+```
+
 * Add the new Comment Form
+```
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+     <h1 style="text-align: center;">Add New Comment to <%=campground.name %></h1>
+     <div style="width:30%; margin:40px auto; ">
+          <form action="/campgrounds/<%=campground._id %>/comments" method="POST">
+              <div class="form-group">
+                  <input class="form-control" type="text" name="comment[text]" placeholder="text">
+              </div>
+              <div class="form-group">
+                  <input class="form-control" tpye="text" name="comment[author]" placeholder="author">
+              </div>
+              <div class="form-group">
+                  <button class="btn btn-lg btn-default btn-primary btn-block" type="submit">Submit!</button>
+              </div>
+          </form>
+                 <a href="/campgrounds">Back</a>
+      </div>
+    </div>
+</div>
+<% include ../partials/footer %>
+
+<p>
+    <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
+</p>
+
+```
+
+## Style Show Page
+* Add Sidebar to show page
+* Display Comments nicely
