@@ -34,7 +34,7 @@ function seedDB(){
                         Comment.create(
                             {
                                 text:"This place is great!",
-                                auther:"Homer"
+                                author:"Homer"
                             },function(err, comment){
                                 if(!err){
                                     campground.comments.push(comment);

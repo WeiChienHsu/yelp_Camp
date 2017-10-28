@@ -283,8 +283,15 @@ module.exports = mongoose.model("Comment",commentSchema);
 
 ```
 
-* Display comments on campground SHOW page
+* Display comments on campground SHOW page -/ populate / exec
 ```
-
+  Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("show", {campground: foundCampground});
+            }
+    });
+    
 ```
 
