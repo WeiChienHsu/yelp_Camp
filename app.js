@@ -5,11 +5,11 @@ var express     = require("express"),
     Campground  = require("./models/campground"),
     seedDB      = require("./seeds");
 
-seedDB();    
+
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.set("view engine","ejs")
 app.use(bodyParser.urlencoded({extended:true}));
-
+seedDB();    
 //SCHEMA SETUP
 
 app.get("/",function(req, res){

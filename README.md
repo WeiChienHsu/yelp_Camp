@@ -209,6 +209,7 @@ function seedDB(){
 module.exports = seedDB;
 ```
 * Add a seeds.js file - 2. Add a few Campgrouds (into the remove)
+* **** There is an error - After every server restart/database reseed, seed refresh the campgrounds index page to get the new campground ids. If you try to reload a show page while on an old campground when you restart the server, it will throw an error because the old campgrounds get deleted with seedDB() when server restarts.**** 
 ```
 var data =[
     {
@@ -283,7 +284,7 @@ module.exports = mongoose.model("Comment",commentSchema);
 
 ```
 
-* Display comments on campground SHOW page -/ populate / exec
+* Display comments on campground SHOW page -/ **populate / exec
 ```
   Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
             if(err){
@@ -295,3 +296,16 @@ module.exports = mongoose.model("Comment",commentSchema);
     
 ```
 
+## NEW & CREATE ROUTE for Comment
+* Nested ROUTES
+```
+INDEX  /campgrounds
+NEW    /campgrounds/new
+CREATE /campgrounds
+SHOW   /campgrounds/:id
+
+NEW    /comments/new   GET
+CREATE /comments       POST
+```
+* Add the Comment NEW and CREATE routes
+* Add the new Comment Form
