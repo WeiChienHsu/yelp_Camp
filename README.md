@@ -175,14 +175,18 @@ app.get("/campgrounds/:id",function(req, res){
 * Create a models directory (campground.js)
 ```
 var mongoose = require("mongoose");
-
 var campgroundSchema = new mongoose.Schema({
-    name:String,
-    image:String,
-    description:String
+   name: String,
+   image: String,
+   description: String,
+   comments: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Comment"
+      }
+   ]
 });
-
-module.exports= mongoose.model("Campground",campgroundSchema);
+module.exports = mongoose.model("Campground", campgroundSchema);
 ```
 * Use modeule exports and require everything correctly
 ```
@@ -263,3 +267,24 @@ var seedDB      = require("./seeds");
 
 seedDB();    
 ```
+
+## Add Commemt
+
+* Add Comment Model
+```
+var mongoose = require("mongoose");
+
+var commentSchema = mongoose.Schema({
+    text:String,
+    author: String
+});
+
+module.exports = mongoose.model("Comment",commentSchema);
+
+```
+
+* Display comments on campground SHOW page
+```
+
+```
+
