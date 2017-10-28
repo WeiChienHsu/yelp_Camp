@@ -1,35 +1,16 @@
 var express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose")
+    mongoose    = require("mongoose"),
+    Campground  = require("./models/campground"),
+    seedDB      = require("./seeds");
 
+seedDB();    
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.set("view engine","ejs")
 app.use(bodyParser.urlencoded({extended:true}));
 
 //SCHEMA SETUP
-var campgroundSchema = new mongoose.Schema({
-    name:String,
-    image:String,
-    description:String
-});
-
-var Campground = mongoose.model("Campground",campgroundSchema);
-
-// Campground.create({
-//     name:"PanDora Mountain", 
-//     image:"https://photosforclass.com/download/14435096036",
-//     description:"This is a huge granite hill, no bathroom, no water. Beautiful granite!"
-//     }, function(err, campground){
-//         if(err){
-//             console.log(err);
-//         } else{
-//             console.log("Newly Created Campground");
-//             console.log(campground);
-//         }
-//     });
-//////////
-
 
 app.get("/",function(req, res){
     res.render("landing");

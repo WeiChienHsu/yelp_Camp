@@ -168,3 +168,98 @@ app.get("/campgrounds/:id",function(req, res){
      <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary" > More Info</a>
  </p>
 ```
+
+
+
+## Refactor Mongoose Code
+* Create a models directory (campground.js)
+```
+var mongoose = require("mongoose");
+
+var campgroundSchema = new mongoose.Schema({
+    name:String,
+    image:String,
+    description:String
+});
+
+module.exports= mongoose.model("Campground",campgroundSchema);
+```
+* Use modeule exports and require everything correctly
+```
+Campground = requie("./models/campground")
+```
+## Add Seeds File (To text if the comment function adding later will work well)
+* Add a seeds.js file - 1. Remove all Campgrouds
+```
+var mongoose = require("mongoose");
+var Campground = require("./models/campground");
+
+function seedDB(){
+    Campground.remove({},function(err){
+        if(!err){
+        console.log("remove campgournds!");
+        }
+    });    
+}
+
+module.exports = seedDB;
+```
+* Add a seeds.js file - 2. Add a few Campgrouds (into the remove)
+```
+var data =[
+    {
+        name: "Cloud's Rest",
+        image:"http://www.visitnc.com/contents/imgcrop/60726/1200/630/preview",
+        description:"Pretty Aweseom like that place!"
+    },
+    {
+        name: "MinTang's Camp",
+        image:"http://www.visitnc.com/contents/imgcrop/61803/1200/630/preview",
+        description:"Great place I've never been to. Recommented!"
+    },
+    {
+        name: "SkyCrapper Paradas",
+        image:"https://greatist.com/sites/default/files/styles/fb-1200x630/public/Campsite_featured.jpg?itok=UJly7Ji0",
+        description:"Blah! Blah lah lha lha Blah!!!"
+    }
+    ]
+=================================
+function seedDB(){
+    // Remove all campgrounds
+    Campground.remove({},function(err){
+        if(!err){
+            console.log("remove campgournds!");
+            // Add a few campgrounds
+            data.forEach(function(seed){
+                Campground.create(seed, function(err,data){
+                    if(!err){
+                        console.log("add a campground");
+                    }
+                }); // create
+            }); // data.forEach
+        }// not err
+    });//remove
+}
+
+```
+* Add a seeds.js file - 3. Add a few Comments
+```
+Comment.create(
+    {
+        text:"This place is great!",
+        auther:"Homer"
+    },function(err, comment){
+        if(!err){
+            campground.comments.push(comment);
+            campground.save();
+            console.log("Create a new comment!");
+        }
+    }); // create Comment
+```
+
+* Run the seeds file every time the server starts
+```
+var seedDB      = require("./seeds");
+
+seedDB();    
+```
