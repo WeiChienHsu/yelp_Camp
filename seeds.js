@@ -6,12 +6,12 @@ var data =[
     {
         name: "Cloud's Rest",
         image:"http://www.visitnc.com/contents/imgcrop/60726/1200/630/preview",
-        description:"Pretty Aweseom like that place!"
+        description:"Bacon ipsum dolor amet beef ribs meatball tongue doner beef meatloaf. Cow pastrami shank chicken venison, bacon picanha ground round pork loin pork chop fatback. Shank jerky doner tail meatball tri-tip frankfurter pancetta cow corned beef pastrami porchetta cupim. Jerky sausage landjaeger kevin. Kevin shank chicken picanha drumstick swine brisket tail bresaola ground round. Landjaeger short loin ground round, corned beef swine bresaola venison sirloin doner."
     },
     {
         name: "MinTang's Camp",
         image:"http://www.visitnc.com/contents/imgcrop/61803/1200/630/preview",
-        description:"Great place I've never been to. Recommented!"
+        description:"Great place I've never been to. Recommented!Great place to go fishin' Bacon ipsum dolor amet kielbasa cow!!!"
     },
     {
         name: "SkyCrapper Paradas",
