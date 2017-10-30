@@ -392,4 +392,4 @@ app.post("/campgrounds/:id/comments", function(req, res){
 
 ## Style Show Page
 * Add Sidebar to show page
-* Display Comments nicely
+* Display Comments
