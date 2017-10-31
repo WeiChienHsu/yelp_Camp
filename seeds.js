@@ -50,3 +50,4 @@ function seedDB(){
 }
 
 module.exports = seedDB;
+// run seed
