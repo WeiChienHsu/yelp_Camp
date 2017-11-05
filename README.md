@@ -443,3 +443,8 @@ app.use(express.static(__dirname + "/public"));
 </div>
 
 ```
+
+## User Authentication
+
+* Add User Model - install packages / passport/ passport-local/ passport-local-mongoose/ express-session
+* 
