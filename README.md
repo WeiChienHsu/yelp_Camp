@@ -447,4 +447,33 @@ app.use(express.static(__dirname + "/public"));
 ## User Authentication
 
 * Add User Model - install packages / passport/ passport-local/ passport-local-mongoose/ express-session
-* 
+```
+var mongoose = require("mongoose");
+var passportLocalMongoose = require("passport-local-mongoose");
+var UserSchema = new mongoose.Schema({
+    username: String,
+    password: String
+});
+
+UserSchema.plugin(passportLocalMongoose);
+module.exports = mongoose.model("User", UserSchema);
+```
+
+* Register - Configure Passport
+```
+app.use(require("express-session")({
+    secret:"Let's build up a yelp camp",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+```
+* Add Register Routes / Templates
+```
+
+```
