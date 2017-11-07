@@ -141,7 +141,7 @@ app.post("/register",function(req, res){
     });
 });
 
-app
+app.get("/login")
 
 
 
