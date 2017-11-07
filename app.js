@@ -137,9 +137,13 @@ app.post("/register",function(req, res){
         
         passport.authenticate("local")(req, res, function(){
             res.redirect("/campgrounds");
-        })
+        });
     });
-})
+});
+
+app
+
+
 
 app.listen(process.env.PORT,process.env.IP,function(){
     console.log("The Yelp Camp server is connecting");
