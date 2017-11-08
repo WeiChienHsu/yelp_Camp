@@ -533,7 +533,21 @@ app.post("/campgrounds/:id/comments",isLoggedIn , function(req, res){
 
 ```
 
-* Show / Hide auth Links in navbar correctly
+* Show / Hide auth Links in navbar correctly - When SignIn only see Logout.
+```
+in the GET campgrounds ROUTE, add a variable currentUser:
+ res.render("campgrounds/index",{campgrounds:allCampgrounds, currentUser: req.user});
+```
+* Pass currentUser variables to every single ROUTE which has a navbar (middleware)
+```
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    next();
+});
+```
+* See the Current User Name
+```
+  <li><a href="#"> Singed In As <strong><%=currentUser.username %></strong></a></li>
 ```
 
-```
+## Refactor ROUTES
