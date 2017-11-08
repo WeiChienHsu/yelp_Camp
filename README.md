@@ -493,7 +493,33 @@ app.post("/register",function(req, res){
 })
 
 ```
-* Add Login Routes / Templates
+* Add Login Routes / Templates (//middleware - authenticated method)
+```
+app.get("/login", function(req, res){
+    res.render("login");
+})
+
+app.post("/login", passport.authenticate("local", 
+{   
+    successRedirect:"/campgrounds",
+    failureRedirect:"login" 
+}),function(req, res){
+});
+
+```
+
+* Add Lougout Routes
+```
+app.get("/logout",function(req, res){
+    req.logout();
+    res.redirect("/campground");
+})
+```
+* Prevent user from adding comments without signin
+```
+
+```
+* Show / Hide auth links correctly
 ```
 
 ```
