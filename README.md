@@ -517,9 +517,23 @@ app.get("/logout",function(req, res){
 ```
 * Prevent user from adding comments without signin
 ```
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    } else{
+        res.redirect("/login");
+    }
+}
 
 ```
-* Show / Hide auth links correctly
+* Add in the get Route that you need to check if it is logged in
+```
+app.get("/campgrounds/:id/comments/new", isLoggedIn ,function(req, res){
+app.post("/campgrounds/:id/comments",isLoggedIn , function(req, res){
+
+```
+
+* Show / Hide auth Links in navbar correctly
 ```
 
 ```

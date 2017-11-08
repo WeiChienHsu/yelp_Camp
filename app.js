@@ -92,7 +92,7 @@ app.get("/campgrounds/:id",function(req, res){
 //Comments Routes
 //==================
 
-app.get("/campgrounds/:id/comments/new",function(req, res){
+app.get("/campgrounds/:id/comments/new", isLoggedIn ,function(req, res){
     Campground.findById(req.params.id, function(err, campground){
         if(!err){
             res.render("comments/new",{campground,campground});
@@ -100,7 +100,7 @@ app.get("/campgrounds/:id/comments/new",function(req, res){
     });
 });
 
-app.post("/campgrounds/:id/comments", function(req, res){
+app.post("/campgrounds/:id/comments",isLoggedIn , function(req, res){
     Campground.findById(req.params.id, function(err, campground){
         if(err){
             console.log(err);
@@ -155,8 +155,15 @@ app.post("/login", passport.authenticate("local",
 app.get("/logout",function(req, res){
     req.logout();
     res.redirect("/campgrounds");
-})
+});
 
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    } else{
+        res.redirect("/login");
+    }
+}
 
 app.listen(process.env.PORT,process.env.IP,function(){
     console.log("The Yelp Camp server is connecting");
