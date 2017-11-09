@@ -551,3 +551,12 @@ app.use(function(req, res, next){
 ```
 
 ## Refactor ROUTES
+
+* Seperate to index.js / comments.js / campgrounds.js
+* Used express Router
+```
+var express = require("express");
+var router  = express.Router();
+
+module.exports = router;
+```
