@@ -1,8 +1,13 @@
 //==================
 //Comments Routes
 //==================
+var express = require("express");
+var router  = express.Router();
+var Campground = require("../models/campground");
+var Comment     =require("../models/comment")
 
-app.get("/campgrounds/:id/comments/new", isLoggedIn ,function(req, res){
+
+router.get("/campgrounds/:id/comments/new", isLoggedIn ,function(req, res){
     Campground.findById(req.params.id, function(err, campground){
         if(!err){
             res.render("comments/new",{campground,campground});
@@ -10,7 +15,7 @@ app.get("/campgrounds/:id/comments/new", isLoggedIn ,function(req, res){
     });
 });
 
-app.post("/campgrounds/:id/comments",isLoggedIn , function(req, res){
+router.post("/campgrounds/:id/comments",isLoggedIn , function(req, res){
     Campground.findById(req.params.id, function(err, campground){
         if(err){
             console.log(err);
@@ -28,3 +33,5 @@ app.post("/campgrounds/:id/comments",isLoggedIn , function(req, res){
         }
     });
 });
+
+module.exports = router;

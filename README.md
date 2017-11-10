@@ -567,8 +567,10 @@ var commentRoutes       = require("./routes/comments"),
     campgroundRoutes    = require("./routes/campgrounds"),
     indexRoutes         = require("./routes/index")
  
- app.use(indexRoutes);
+app.use(indexRoutes);
 app.use(campgroundRoutes);
 app.use(commentRoutes); 
   
 ```
+
+* Set up (adding require) each js file
