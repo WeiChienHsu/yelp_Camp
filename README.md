@@ -560,3 +560,15 @@ var router  = express.Router();
 
 module.exports = router;
 ```
+* Imported Routes
+
+```
+var commentRoutes       = require("./routes/comments"),
+    campgroundRoutes    = require("./routes/campgrounds"),
+    indexRoutes         = require("./routes/index")
+ 
+ app.use(indexRoutes);
+app.use(campgroundRoutes);
+app.use(commentRoutes); 
+  
+```
