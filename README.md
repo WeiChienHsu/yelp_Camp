@@ -625,7 +625,7 @@ comment.save();
 
 * Provent someone isn't login to comment
 ```
-
+add isLoggedIn function in the campgournds.js file and in the middleware
 ```
 * Change the models of campgrounds
 ```
@@ -638,6 +638,7 @@ var campgroundSchema = new mongoose.Schema({
          type: mongoose.Schema.Types.ObjectId,
          ref:"User"
       },
+      username: String
    },
    comments: [
       {
@@ -646,4 +647,28 @@ var campgroundSchema = new mongoose.Schema({
       }
    ]
 });
+```
+* Add in campgrounds Post ROUTE 
+```
+var author = {
+        id: req.user._id,
+        username: req.user.username
+    };
+    
+var newCampground = {name:name,image:image,description:description,author:author};
+
+Campground.create(newCampground,function(err, newlyCreated){
+        if(err){
+            console.log(err);
+        } else{
+            res.redirect("/campgrounds");
+        }
+    });
+
+```
+* Show the username in show page
+```
+<p>
+    <em>Submitted By<%= campground.author.username%></em>
+</p>
 ```
