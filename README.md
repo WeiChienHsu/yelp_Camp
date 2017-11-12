@@ -610,5 +610,14 @@ var commentSchema = mongoose.Schema({
     }
 });
 
-
+```
+* Save the User data into comment model by changing comment Route
+```
+comment.author.id = req.user._id;
+comment.author.username = req.user.username;
+comment.save();
+```
+* Change the show page of campgrounds
+```
+<strong><%=comment.author.username %></strong>
 ```
