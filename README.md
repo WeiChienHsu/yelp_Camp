@@ -677,17 +677,47 @@ Campground.create(newCampground,function(err, newlyCreated){
 * Add Method-Override (Since we need to use PUT Method for UPDATE Route)
 ```
 npm install method-override --save
-```
-* Add Edit Route for Campgrounds
-```
 
+methodOverride  = require("method-override")
+app.use(methodOverride("_method"));
 ```
-* Add Link to Edit Page
+* Add Edit Route for Campgrounds (GET)
+ - Used findById() to send the specific campground id to edit page
 ```
-
+router.get("/:id/edit",function(req, res){
+    Campground.findById(req.params.id, function(err, foundCampground){
+      if(err){
+          res.redirect("/campgrounds");
+      } else{
+            res.render("campgrounds/edit",{campground:foundCampground});  
+      }
+    });
+});
 ```
-* Add Update Route
+- In campgournd form action, we need to use PUT Method to handle update request
 ```
+<form action="/campgrounds/<%=campground._id%>/?_method=PUT" method="POST">
+```
+- Then, fill in the data of original info by changing the placeholder into value
+```
+value="<%= campground.name%>"
+```
+* Add Update Route (PUT)
+ - Group all info from edit page into a single Object
+```
+name="campground[name]"
+```
+ - Used findByIdAndUpdate() 
+```
+router.put("/:id", function(req, res){
+    Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
+        if(err){
+            res.redirect("/campgrounds");
+        } else {
+            res.redirect("/campgrounds/" + req.params.id);
+        }
+    });
+});
 
 ```
 * Fix $set problem
