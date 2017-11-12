@@ -31,12 +31,12 @@ router.post("/",function(req, res){
 });
 
 // Campgrounds NEW - show form to create new campground
-router.get("/new",function(req, res){
+router.get("/new",isLoggedIn, function(req, res){
     res.render("campgrounds/new.ejs");
 });
 
 // Campgrounds SHOW - show more info about one campground
-router.get("/:id",function(req, res){
+router.get("/:id",isLoggedIn, function(req, res){
     //find the campfround with provided ID
     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
             if(err){
@@ -48,3 +48,11 @@ router.get("/:id",function(req, res){
 });
 
 module.exports = router;
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    } else{
+        res.redirect("/login");
+    }
+}

@@ -621,3 +621,9 @@ comment.save();
 ```
 <strong><%=comment.author.username %></strong>
 ```
+## Save Username and Id to newly created campground
+
+* Provent someone isn't login to comment
+```
+
+```
