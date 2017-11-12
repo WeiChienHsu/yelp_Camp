@@ -574,3 +574,41 @@ app.use(commentRoutes);
 ```
 
 * Set up (adding require) each js file
+```
+var express = require("express");
+var router  = express.Router();
+var passport = require("passport");
+var User    = require("../models/user")
+
+
+```
+* Shorten the Routes (Route decricaion)
+```
+app.use("/campgrounds",campgroundRoutes);
+router.get("/",function(req, res){
+router.post("/",function(req, res){
+router.get("/new",function(req, res){
+router.get("/:id",function(req, res){
+
+```
+* Solve the problem of none-loading req.params.id
+```
+var router  = express.Router({mergeParams:true});
+```
+
+## Associtates Users and Commtents
+* Change the model of comments
+```
+var commentSchema = mongoose.Schema({
+    text:String,
+    author:{
+        id: {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User"
+        },
+        username: String
+    }
+});
+
+
+```

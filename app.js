@@ -9,6 +9,7 @@ var express         = require("express"),
     User            = require("./models/user"),
     seedDB          = require("./seeds")
 
+// Requiring Routes
 var commentRoutes       = require("./routes/comments"),
     campgroundRoutes    = require("./routes/campgrounds"),
     indexRoutes         = require("./routes/index")
@@ -35,9 +36,9 @@ app.use(function(req, res, next){
     next();
 });
 
-app.use(indexRoutes);
-app.use(campgroundRoutes);
-app.use(commentRoutes);
+app.use("/",indexRoutes);
+app.use("/campgrounds",campgroundRoutes);
+app.use("/campgrounds/:id/comments",commentRoutes);
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
