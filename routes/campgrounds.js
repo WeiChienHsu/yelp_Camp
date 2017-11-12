@@ -52,6 +52,12 @@ router.get("/:id",isLoggedIn, function(req, res){
     });
 });
 
+//EDIT Campgrounds ROUTE
+
+
+//UPDATE Campgrounds ROUTE
+
+
 module.exports = router;
 
 function isLoggedIn(req, res, next){

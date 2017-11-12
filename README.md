@@ -669,6 +669,28 @@ Campground.create(newCampground,function(err, newlyCreated){
 * Show the username in show page
 ```
 <p>
-    <em>Submitted By<%= campground.author.username%></em>
+    <em>Submitted By <%= campground.author.username%></em>
 </p>
+```
+## EDIT Campgournds
+
+* Add Method-Override (Since we need to use PUT Method for UPDATE Route)
+```
+npm install method-override --save
+```
+* Add Edit Route for Campgrounds
+```
+
+```
+* Add Link to Edit Page
+```
+
+```
+* Add Update Route
+```
+
+```
+* Fix $set problem
+```
+
 ```
