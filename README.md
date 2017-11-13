@@ -807,15 +807,34 @@ router.get("/:id/edit",checkCampgroundOwnership, function(req, res){
 ```
 
 ## Edit Comments
+ - We need to add a new comment id 
+ - (/campgournds/:id/comments/:comment_id/edit)
+
+* EDIT page (deal with form action)
+ - We need to send the value of comment and campground_id(not need to send all ids in the dataset)
+```
+ <form action="/campgrounds/<%=campground_id %>/comments/<%= comment._id %>/?_method=POST" method="POST">
+              <div class="form-group">
+                  <input class="form-control" type="text" name="comment[text]" value="<%= comment.text%>">
+              </div>
+              <div class="form-group">
+                  <button class="btn btn-lg btn-default btn-primary btn-block" type="submit">Submit</button>
+              </div>
+          </form>
+```
+
+* EDIT Button
+```
+<a class="btn btn-xs btn-warning" 
+    href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">
+       Edit
+    </a>
+```
 * EDIT Route
 ```
 
 ```
 
-* EDIT Button
-```
-
-```
 
 * EDIT UPDATE Route
 ```
