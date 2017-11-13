@@ -879,3 +879,23 @@ router.delete("/:comment_id",function(req, res){
 ```
 
 ## Authorization for Comments
+```
+function checkCommentOwnership(req, res, next){
+    if(req.isAuthenticated()){ // if user is logged in
+        Comment.findById(req.params.comment_id, function(err, foundComment){
+            if(err){
+                res.redirect("back");
+            } else{
+                if(foundComment.author.id.equals(req.user._id)){ //does user owns the campground
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        res.redirect("back");
+    }
+}
+```
+
