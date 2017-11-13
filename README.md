@@ -720,7 +720,15 @@ router.put("/:id", function(req, res){
 });
 
 ```
-* Fix $set problem
+## Delete Campgournds
+- Add Delete Button as a form since we need to use action attribute to send a Delete Request
+```
+<form action="/campgrounds/<%=campground._id%>/?_method=DELETE" method="POST">
+     <button class="btn btn-danger">Delete</button>                        
+</form>
+```
+-Add Destroy Route
 ```
 
 ```
+

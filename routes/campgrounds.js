@@ -74,6 +74,11 @@ router.put("/:id", function(req, res){
     });
 });
 
+//DESTROY Campgrounds ROUTE
+router.delete("/:id",function(req, res){
+    res.send("Hey")
+})
+
 module.exports = router;
 
 function isLoggedIn(req, res, next){

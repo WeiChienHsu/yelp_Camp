@@ -6,17 +6,28 @@ var data =[
     {
         name: "Cloud's Rest",
         image:"http://www.visitnc.com/contents/imgcrop/60726/1200/630/preview",
-        description:"Bacon ipsum dolor amet beef ribs meatball tongue doner beef meatloaf. Cow pastrami shank chicken venison, bacon picanha ground round pork loin pork chop fatback. Shank jerky doner tail meatball tri-tip frankfurter pancetta cow corned beef pastrami porchetta cupim. Jerky sausage landjaeger kevin. Kevin shank chicken picanha drumstick swine brisket tail bresaola ground round. Landjaeger short loin ground round, corned beef swine bresaola venison sirloin doner."
+        description:"Bacon ipsum dolor amet beef ribs meatball tongue doner beef meatloaf. Cow pastrami shank chicken venison, bacon picanha ground round pork loin pork chop fatback. Shank jerky doner tail meatball tri-tip frankfurter pancetta cow corned beef pastrami porchetta cupim. Jerky sausage landjaeger kevin. Kevin shank chicken picanha drumstick swine brisket tail bresaola ground round. Landjaeger short loin ground round, corned beef swine bresaola venison sirloin doner.",
+        author:{
+            username:"Kevin"
+        }    
+        
     },
     {
         name: "MinTang's Camp",
         image:"http://www.visitnc.com/contents/imgcrop/61803/1200/630/preview",
-        description:"Great place I've never been to. Recommented!Great place to go fishin' Bacon ipsum dolor amet kielbasa cow!!!"
+        description:"Great place I've never been to. Recommented!Great place to go fishin' Bacon ipsum dolor amet kielbasa cow!!!",
+        author:{
+            username:"Kevin"
+        }
+        
     },
     {
         name: "SkyCrapper Paradas",
         image:"https://greatist.com/sites/default/files/styles/fb-1200x630/public/Campsite_featured.jpg?itok=UJly7Ji0",
-        description:"Blah! Blah lah lha lha Blah!!!"
+        description:"Blah! Blah lah lha lha Blah!!!",
+        author:{
+            username:"Nick"
+        }
     }
     ]
 
