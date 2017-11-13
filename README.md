@@ -813,7 +813,7 @@ router.get("/:id/edit",checkCampgroundOwnership, function(req, res){
 * EDIT page (deal with form action)
  - We need to send the value of comment and campground_id(not need to send all ids in the dataset)
 ```
- <form action="/campgrounds/<%=campground_id %>/comments/<%= comment._id %>/?_method=POST" method="POST">
+ <form action="/campgrounds/<%=campground_id %>/comments/<%= comment._id %>/?_method=PUT" method="POST">
               <div class="form-group">
                   <input class="form-control" type="text" name="comment[text]" value="<%= comment.text%>">
               </div>
@@ -832,13 +832,28 @@ router.get("/:id/edit",checkCampgroundOwnership, function(req, res){
 ```
 * EDIT Route
 ```
-
+router.get("/:comment_id/edit",function(req, res){
+    Comment.findById(req.params.comment_id,function(err, foundComment){
+        if(err){
+            res.redirect("back");
+        } else {
+           res.render("comments/edit", {campground_id: req.params.id, comment: foundComment}); 
+        }
+    });
+});
 ```
-
 
 * EDIT UPDATE Route
 ```
-
+router.put("/:comment_id", function(req, res){
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updateComment){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/campgrounds/" + req.params.id);
+        }
+    });
+});
 ```
 
 ## Delete Comments
