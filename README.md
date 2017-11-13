@@ -393,7 +393,26 @@ app.post("/campgrounds/:id/comments", function(req, res){
 ## Style Show Page
 * Add Sidebar to show page
 ```
-
+	<nav class="navbar navbar-default">
+     <div class="container-fluid">
+         <div class="navbar-header">
+             <a class="navbar-brand" href="/">Yelp Camp</a>
+         </div>  
+         <div class="collapse navbar-collapse">
+             <ul class="nav navbar-nav navbar-right">
+                 <!--if User is undefined-->
+              <% if(!currentUser){ %>
+                 <li><a href="/login">Login</a></li>
+                 <li><a href="/register">Sign Up</a></li>
+              <% } else { %>
+                 <!--if User is defined-->
+                 <li><a href="#"> Singed In As <strong><%=currentUser.username %></strong></a></li>
+                 <li><a href="/logout">Logout</a></li>
+              <% } %>
+             </ul>
+         </div>
+     </div>
+ </nav>
 ```
 * Custimaize CSS
 ```
@@ -721,14 +740,88 @@ router.put("/:id", function(req, res){
 
 ```
 ## Delete Campgournds
-- Add Delete Button as a form since we need to use action attribute to send a Delete Request
+- Add Delete Button as a form since we need to use action attribute to send a Delete Request (With a delete confirmation)
 ```
 <form action="/campgrounds/<%=campground._id%>/?_method=DELETE" method="POST">
-     <button class="btn btn-danger">Delete</button>                        
+    <button onclick="return confirm('Are you sure you want to delete this campground?');" class="btn btn-danger">Delete</button>                        
 </form>
 ```
 -Add Destroy Route
 ```
+router.delete("/:id",function(req, res){
+    Campground.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/campgrounds");
+        } else{
+            res.redirect("/campgrounds");
+        }
+    });
+});
+
+```
+## Authorization
+* User can only edit / delete his campgrounds
+ - Check if user is logged in or not (Authentication)
+ - Check if user owns the campground (Authorization)
+ - "foundCampground.author.id" is an Object and "req.user._id" is a String  
+ - Used the method provided by mongoose -> . equals()
+ - next() for continuouly run findById codes.
+```
+function checkCampgroundOwnership(req, res, next){
+    if(req.isAuthenticated()){ // if user is logged in
+        Campground.findById(req.params.id, function(err, foundCampground){
+            if(err){
+                res.redirect("back");
+            } else{
+                if(foundCampground.author.id.equals(req.user._id)){ //does user owns the campground
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        res.redirect("back");
+    }
+}
 
 ```
 
+```
+router.get("/:id/edit",checkCampgroundOwnership, function(req, res){
+    Campground.findById(req.params.id, function(err,foundCampground){
+        if(!err){
+            res.render("campgrounds/edit",{campground:foundCampground});
+        }
+    });
+});
+```
+* Hide/Show edit and delete buttons (for the best User Experience that you won't see any function which you couldn't use it)
+```
+ <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>    
+    <a class="btn btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+    <form id="delete-form"action="/campgrounds/<%=campground._id%>/?_method=DELETE" method="POST">
+        <button onclick="return confirm('Are you sure you want to delete this campground?');" class="btn btn-danger">Delete</button>                        
+    </form>
+<% } %>
+```
+
+## Edit Comments
+* EDIT Route
+```
+
+```
+
+* EDIT Button
+```
+
+```
+
+* EDIT UPDATE Route
+```
+
+```
+
+## Delete Comments
+
+## Authorization for Comments

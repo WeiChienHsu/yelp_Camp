@@ -53,18 +53,16 @@ router.get("/:id",isLoggedIn, function(req, res){
 });
 
 //EDIT Campgrounds ROUTE
-router.get("/:id/edit",function(req, res){
-    Campground.findById(req.params.id, function(err, foundCampground){
-      if(err){
-          res.redirect("/campgrounds");
-      } else{
-            res.render("campgrounds/edit",{campground:foundCampground});  
-      }
+router.get("/:id/edit",checkCampgroundOwnership, function(req, res){
+    Campground.findById(req.params.id, function(err,foundCampground){
+        if(!err){
+            res.render("campgrounds/edit",{campground:foundCampground});
+        }
     });
 });
 
 //UPDATE Campgrounds ROUTE
-router.put("/:id", function(req, res){
+router.put("/:id",checkCampgroundOwnership, function(req, res){
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
         if(err){
             res.redirect("/campgrounds");
@@ -75,9 +73,15 @@ router.put("/:id", function(req, res){
 });
 
 //DESTROY Campgrounds ROUTE
-router.delete("/:id",function(req, res){
-    res.send("Hey")
-})
+router.delete("/:id", checkCampgroundOwnership, function(req, res){
+    Campground.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/campgrounds");
+        } else{
+            res.redirect("/campgrounds");
+        }
+    });
+});
 
 module.exports = router;
 
@@ -86,5 +90,23 @@ function isLoggedIn(req, res, next){
         return next();
     } else{
         res.redirect("/login");
+    }
+}
+
+function checkCampgroundOwnership(req, res, next){
+    if(req.isAuthenticated()){ // if user is logged in
+        Campground.findById(req.params.id, function(err, foundCampground){
+            if(err){
+                res.redirect("back");
+            } else{
+                if(foundCampground.author.id.equals(req.user._id)){ //does user owns the campground
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        });
+    } else {
+        res.redirect("back");
     }
 }
