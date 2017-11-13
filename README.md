@@ -858,4 +858,24 @@ router.put("/:comment_id", function(req, res){
 
 ## Delete Comments
 
+ - Delete button
+```
+<form class="delete-form" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+   <input type="submit" class="btn btn-xs btn-danger" value="delete">                              
+</form>
+```
+- Destroy Route
+```
+router.delete("/:comment_id",function(req, res){
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/campgrounds/"+ req.params.id);
+        }
+    });
+});
+
+```
+
 ## Authorization for Comments
