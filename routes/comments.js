@@ -42,7 +42,7 @@ router.get("/:comment_id/edit",function(req, res){
         if(err){
             res.redirect("back");
         } else {
-           res.render("/comments/edit", {campground_id: req.params.id, comment: foundComment}); 
+           res.render("comments/edit", {campground_id: req.params.id, comment: foundComment}); 
         }
     });
     
