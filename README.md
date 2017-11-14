@@ -975,4 +975,70 @@ var middleware = require("../middleware");
  ```
  router.post("/",middleware.isLoggedIn,function(req, res){
  ```
- 
+ ## Flash Messages
+ * Install and configure connect-flash
+```
+npm install connect-flash --save
+```
+
+* Add method in the middleware (Give an access for next request)
+ - req.flash("error","   ");
+```
+middlewareObj.isLoggedIn = function(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    } else{
+        req.flash("error","Please Login First!");
+        res.redirect("/login");
+    }
+}
+```
+
+* Then, handle the "/login" for the error signal
+```
+router.get("/login", function(req, res){
+    res.render("login",{message: req.flash("error")});
+});
+```
+* Next step, go to the view page (login.ejs) to send the message out
+* In order to show all error message in all place they should be showed, move the message to header.ejs
+```
+<h1><%= message %></h1>
+
+```
+* But we couldn't just send the message in each singal route, thus we pass message to each local page
+```
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    res.locals.message = req.flash("error");
+    next();
+});
+
+```
+* Add message in Logout Route (Always before we redirect user)
+```
+router.get("/logout",function(req, res){
+    req.logout();
+    req.flash("success","Logged you out!");
+    res.redirect("/campgrounds");
+});
+
+```
+
+ * Add bootstrap alerts to header (without identifying success or error)
+```
+ <div class="container">
+    <div class="alert alert-danger" role="alert">
+        <%= message %> 
+    </div>   
+ </div>
+```
+* To seperate error and success messgae, differnate in the app.use
+```
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    next();
+});
+```

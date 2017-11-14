@@ -43,6 +43,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();
     } else{
+        req.flash("error","Please Login Before Next Action");
         res.redirect("/login");
     }
 }
