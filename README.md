@@ -1042,3 +1042,54 @@ app.use(function(req, res, next){
     next();
 });
 ```
+* Modify bootstrap alerts(Add in correct logic)
+```
+ <div class="container">
+    <% if(error && error.length > 0){ %> 
+        <div class="alert alert-danger" role="alert">
+            <%= error %> 
+        </div>   
+    <% } %>
+    <% if(success && success.length > 0){ %>      
+        <div class="alert alert-success" role="alert">
+            <%= success %> 
+        </div>   
+    <% } %>
+ </div>
+```
+
+* Adding Helpful Errors
+ - Comment Route
+ ```
+ req.flash("success","Successfully added comment");
+ req.flash("success","Comment Deleted");
+ ```
+ - Authentication Route (SignUp)
+ ```
+ router.post("/register",function(req, res){
+    var newUser = new User({username:req.body.username});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            req.flash("success",err);
+            return res.redirect("/register");
+        }
+        
+        passport.authenticate("local")(req, res, function(){
+            req.flash("Welcome to YelpCamp " + user.username);
+            res.redirect("/campgrounds");
+        });
+    });
+});
+ ```
+ - Authentication Route (Successfully Login)
+ ```
+ router.post("/login", function(req, res, next){
+    passport.authenticate("local", 
+    {   
+        successRedirect:"/campgrounds",
+        failureRedirect:"login",
+        successFlash: "Welcome " + req.body.username + "!"
+    })(req, res);
+}) ;
+ ```
+ 

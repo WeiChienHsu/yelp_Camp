@@ -17,11 +17,12 @@ router.post("/register",function(req, res){
     var newUser = new User({username:req.body.username});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            console.log(err);
-            res.render("register");
+            req.flash("error",err.message);
+            return res.redirect("/register");
         }
         
         passport.authenticate("local")(req, res, function(){
+            req.flash("success","Welcome to YelpCamp " + user.username);
             res.redirect("/campgrounds");
         });
     });
@@ -32,12 +33,14 @@ router.get("/login", function(req, res){
     res.render("login");
 });
 // Login From Logic Route
-router.post("/login", passport.authenticate("local", 
-{   
-    successRedirect:"/campgrounds",
-    failureRedirect:"login" //middleware - authenticated method
-}),function(req, res){
-});
+router.post("/login", function(req, res, next){
+    passport.authenticate("local", 
+    {   
+        successRedirect:"/campgrounds",
+        failureRedirect:"login",
+        successFlash: "Welcome " + req.body.username + "!"
+    })(req, res);
+}) ;
 
 // Logout Route
 router.get("/logout",function(req, res){
