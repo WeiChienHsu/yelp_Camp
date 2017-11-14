@@ -9,7 +9,7 @@
                   <input class="form-control" type="text" name="name" id="name" placeholder="Yosemite" required>
               </div>
               <div class="form-group">
-                  <label for="image">Image Url</label>
+                  <label for="image">Image Url <br> (ex. https://www.utdallas.edu/enroll/files/utdallas-sign.jpg ) </label>
                   <input class="form-control" tpye="text" name="image" id="image" placeholder="https://images.unsplash.com/..." required>
               </div>
               <div class="form-group">
@@ -18,7 +18,7 @@
               </div>
               <div class="form-group">
                   <label for="location">Location</label>
-                  <input class="form-control" tpye="text" name="location" id="location" placeholder="Yosemite National Park, CA">
+                  <input class="form-control" tpye="text" name="location" id="locationTextField" placeholder="Yosemite National Park, CA"  required>
               </div>
               <div class="form-group">
                   <label for="description">Description</label>
@@ -32,5 +32,13 @@
                  <a href="/campgrounds">Back</a>
       </div>
     </div>
+    
+<script>
+    function init() {
+        var input = document.getElementById('locationTextField');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    }
+    google.maps.event.addDomListener(window, 'load', init);
+</script>
 
 <% include ../partials/footer %>
