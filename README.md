@@ -1193,3 +1193,64 @@ app.use(function(req, res, next){
 }
 
 ```
+
+## Connect to the Google Map
+* Get Google Maps API Key (Remember to set the security after deployment to AWS or Heroku)
+```
+AIzaSyBq2Y6s_mWuXCIQ9PffE4RLm1YpvXG89_E
+```
+* Add Google Maps scripts to application
+```
+<script>
+  function initMap() {
+    var lat = <%= campground.lat %>;
+    var lng = <%= campground.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= campground.name %><br />
+      <%= campground.location %></strong>
+      <p><%= campground.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=API-KEY-HERE&callback=initMap"></script>
+```
+* Display the campground location in show.ejs
+```
+<div id="map"></div>
+
+#map {
+   height:400px;
+   width:100%;
+ }
+```
+* Update campground model
+```
+var campgroundSchema = new mongoose.Schema({
+   name: String,
+   price:String,
+   image: String,
+   description: String,
+   location:String,
+   lat:Number,
+   lng:Number,
+```
+* Update new and edit forms
+* Add location input field
+* Update campground routes
+* Solve the typing error problems
