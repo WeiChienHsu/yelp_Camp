@@ -76,7 +76,6 @@ body {
 @keyframes imageAnimation { 
   0% { 
     opacity: 0; 
-    animation-timing-function: ease-in;
   }
   10% {
     opacity: 1;

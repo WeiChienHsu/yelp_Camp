@@ -1251,6 +1251,66 @@ var campgroundSchema = new mongoose.Schema({
    lng:Number,
 ```
 * Update new and edit forms
-* Add location input field
+```
+<div class="form-group">
+  <label for="location">Location</label>
+  <input class="form-control" tpye="text" name="location" id="location" value="<%= campground.location %>" pattern='/[$-/:-?{-~!"^_`\[\]]/' required title="No special characters allowed">
+</div>
+```
 * Update campground routes
-* Solve the typing error problems
+```
+router.post("/",middleware.isLoggedIn,function(req, res){
+    //get data from form and add to campgrounds array
+    var name = req.body.name;
+    var image = req.body.image;
+    var description = req.body.description;
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    };
+    var price = req.body.price;
+    geocoder.geocode(req.body.location, function (err, data) {
+         if(err){
+             console.log(err);
+         } else{
+            var lat = data.results[0].geometry.location.lat;
+            var lng = data.results[0].geometry.location.lng;
+            var location = data.results[0].formatted_address;
+            var newCampground = {name: name, image: image, description: description, price: price, author:author, location: location, lat: lat, lng: lng};
+            Campground.create(newCampground,function(err, newlyCreated){
+                if(err){
+                    console.log(err);
+                } else{
+                    console.log(newlyCreated);
+                    res.redirect("/campgrounds");
+                }
+            });
+        }
+    });
+});
+    
+```
+
+```
+router.put("/:id", function(req, res){
+  geocoder.geocode(req.body.location, function (err, data) {
+    if(err){
+        console.log(err);
+    } else {
+        var lat = data.results[0].geometry.location.lat;
+        var lng = data.results[0].geometry.location.lng;
+        var location = data.results[0].formatted_address;
+        var newData = {name: req.body.campground.name, image: req.body.campground.image, description: req.body.campground.description, price: req.body.campground.price, location: location, lat: lat, lng: lng};
+        Campground.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, campground){
+            if(err){
+                req.flash("error", err.message);
+                res.redirect("back");
+            } else {
+                req.flash("success","Successfully Updated!");
+                res.redirect("/campgrounds/" + campground._id);
+            }
+        });    
+    }
+  });
+});
+```
