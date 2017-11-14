@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<div class="container">
+
     <div class="row">
         <div class="col-md-3">
             <p class="lead">YelpCamp</p>
@@ -10,6 +10,8 @@
                 <li class="list-group-item"> Info 3 </li>
             </div>
             <div id="map"></div>
+            <p> </p>
+            <a href="/campgrounds">Go Back</a>
         </div>
         <div class="col-md-9">
             <div class="thumbnail">
@@ -19,7 +21,7 @@
                     <h3><a><%=campground.name %></a></h3>
                     <p><%= campground.description%></p>
                     <p>
-                        <em>Submitted By <strong><%= campground.author.username%></strong></em>
+                       <em>Submitted by: <%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %></em>
                     </p>
                     
                     <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>    
@@ -42,7 +44,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <strong><%=comment.author.username %></strong>
-                            <span class="pull-right"> 10 days ago</span>
+                            <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
                             <p>
                                  <%=comment.text%>
                             </p>
@@ -64,7 +66,7 @@
         </div>
     </div>
     
-</div>
+
 
 <!--Google Map Connection-->
 

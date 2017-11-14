@@ -1,9 +1,23 @@
 <% include ./partials/header %>
 
-<h1>Login</h1>
-<form action="/login" method="POST">
-    <input name="username" placeholder="username" type="text">
-    <input name="password" placeholder="password" type="password">
-    <button> Login </button>
-</form>
+<div class="row">
+    <h1 style="text-align: center">Login</h1>
+    <div style="width: 30%; margin: 25px auto;">
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <input class="form-control" type="text" name="username" id="username" placeholder="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="password">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block">Login</button>
+            </div>
+        </form>
+        <a href="/campgrounds">Go Back</a>
+    </div>
+</div>
+
 <% include ./partials/footer %>

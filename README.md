@@ -1314,3 +1314,93 @@ router.put("/:id", function(req, res){
   });
 });
 ```
+## Styling Navbar and Singup form
+ - Firstly, move the div .container to the header and footer file and remove ones in the views file
+ - Bootstrap Login page
+ ```
+ Same as Edit form (add an additional Labels)
+ ```
+ - Password Confirm
+ ```
+ <script>
+ var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+ ```
+ - Add hamburger
+ ```
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="/">YelpCamp</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="<%= typeof page !== 'undefined' && page === 'campgrounds' ? 'active' : '' %>"><a href="/campgrounds">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <% if(!currentUser){ %>
+                  <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
+                  <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
+              <% } else { %>
+                  <li><a href="#">Signed In As <%= currentUser.username %></a></li>
+                  <li><a href="/logout">Logout</a></li>
+              <% } %>
+          </ul>
+        </div>
+    </div>
+</nav>
+ 
+ ```
+ 
+ ## Add a posting time
+  - install moment js
+  - Require moment and add it to app.locals
+  ```
+  app.locals.moment = require('moment');
+  ```
+  - Update campground and comment models
+  ```
+     createAt:{
+      type:Date,
+      default:Date.now
+   },
+  ```
+  - Use moment in show page
+  ```
+<p>
+    <em>Submitted by: <%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %></em>
+</p>
+
+
+  
+  ```
+ 
+ 
+ ## Add my personal info in footer
+ ```
+   <div class="social-icons">
+    <ul class="list-inline">
+      <li><a href="mailto:weichien711@gmail.com?Subject=Visiter from your website" target=_"blank"  ><i class="fa fa-envelope"></i></a></li>
+      <li><a href="https://github.com/WeiChienHsu" target=_"blank"><i class="fa fa-github"></i></a></li>
+      <li><a href="https://www.linkedin.com/in/weichien-hsu/" target=_"blank"><i class="fa fa-linkedin"></i></a></li>
+    </ul>
+  </div> <!-- /.social-icons -->
+ ```
