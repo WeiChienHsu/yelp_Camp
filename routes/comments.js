@@ -69,31 +69,4 @@ router.delete("/:comment_id",checkCommentOwnership,function(req, res){
     });
 });
 
-// middleware
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    } else{
-        res.redirect("/login");
-    }
-}
-
 module.exports = router;
-
-function checkCommentOwnership(req, res, next){
-    if(req.isAuthenticated()){ // if user is logged in
-        Comment.findById(req.params.comment_id, function(err, foundComment){
-            if(err){
-                res.redirect("back");
-            } else{
-                if(foundComment.author.id.equals(req.user._id)){ //does user owns the campground
-                    next();
-                } else {
-                    res.redirect("back");
-                }
-            }
-        });
-    } else {
-        res.redirect("back");
-    }
-}

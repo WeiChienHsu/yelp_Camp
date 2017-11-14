@@ -899,3 +899,17 @@ function checkCommentOwnership(req, res, next){
 }
 ```
 
+```
+ <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>  
+    <a class="btn btn-xs btn-warning" 
+      href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">
+        Edit
+    </a>
+    <form class="delete-form" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+        <input onclick="return confirm('Are you sure you want to delete this comment?');" type="submit" class="btn btn-xs btn-danger" value="delete">                              
+    </form>
+<% } %>
+
+```
+
+## Refactor Middleware
