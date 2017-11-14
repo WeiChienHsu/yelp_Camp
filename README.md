@@ -1112,3 +1112,84 @@ app.use(function(req, res, next){
       <li></li>
     </ul>
  ```
+ * Styling the Landing Page
+  - Position the welcome text and view all campgrounds button
+ ```
+ #landing-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
+}
+ ```
+ * Styling the unlimited lists
+ ```
+ .slideshow { 
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ ```
+ 
+ * Styling the limited lists
+ ```
+ .slideshow li { 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 50s linear infinite; 
+}
+ ```
+ * Create the keyframes for the animation
+ 
+ ```
+ @keyframes imageAnimation { 
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}
+ ```
+ 
+* Add a showder under title and hr
+```
+#landing-header h1 {
+  color: #fff;
+  padding-bottom:5px;
+  font-size:40px;
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+              0px 8px 13px rgba(0,0,0,0.1),
+              0px 18px 23px black;
+  
+}
+
+.page_hr{
+  width: 360px;
+  border-top:1px solid #f8f8f8;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+```
