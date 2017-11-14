@@ -966,7 +966,12 @@ middlewareObj.isLoggedIn = function(req, res, next){
 
 module.exports = middlewareObj;
 ```
- - Require the middleware (Default to directly require for the index.js)
+- Fix!!!!!! Bug (if there's not volid id, in the past vision, it couldn't be found on DB and the server will crashdown)
+```
+if(err || !foundCampground){
+```
+
+- Require the middleware (Default to directly require for the index.js)
 ```
 var middleware = require("../middleware");
 ```
