@@ -1424,11 +1424,21 @@ confirm_password.onkeyup = validatePassword;
  ```
  
  ## Create New environment (development database environment)
- 
+* Add a local DB into DATABASEURL var
 ```
 export DATABASEURL=mongodb://localhost/yelp_camp 
 ```
-
+* Now, You counld connent to your development database 
 ```
 mongoose.connect(process.env.databaseURL);
 ```
+
+* Create a backup solution
+```
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+mongoose.connect(url);
+
+```
+
+* Apply on Heroku, create a Config Variables
+(https://yelpcamp-wei.herokuapp.com/)
