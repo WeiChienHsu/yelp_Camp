@@ -4,7 +4,8 @@ App Demo:  https://yelpcamp-wei.herokuapp.com/
 
 ## Introduction
 * YelpCamp is a multi-user web app that I made to explore the power of Node.js, Express, MongoDB and npm packages. This app features secured user signup and login functions and allows logged-in users to post, edit and delete campgrounds. Users can also post, edit and delete comments for each campground. Users can give addresses to campgrounds and have their locations shown on a Google Map. This app also features beautiful images which slow it down significantly since I'm using free database and server hosts.
-* 
+* environment: Node.Js
+
 ## Features:
 
 * Hosted on Heroku servers
@@ -20,6 +21,23 @@ App Demo:  https://yelpcamp-wei.herokuapp.com/
 * Geocoder with Google Maps API for rendering locations of campsites
 * Flash messages to notify errors when User is redirected from a page
 * Bootstrap to provide responsive design that is great on mobile
+
+## Dependencies
+
+```
+    "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "geocoder": "^0.2.3",
+    "method-override": "^2.3.10",
+    "moment": "^2.19.2",
+    "mongoose": "^4.12.4",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.4.0"
+```
 
 ## Initial Setup
 * Add Langing Page
@@ -1380,7 +1398,7 @@ confirm_password.onkeyup = validatePassword;
   ```
   - Update campground and comment models
   ```
-     createAt:{
+     createdAt:{
       type:Date,
       default:Date.now
    },
