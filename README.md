@@ -1,5 +1,7 @@
 # YelpCamp APP
 
+App Demo:  https://yelpcamp-wei.herokuapp.com/
+
 ## Introduction
 * YelpCamp is a multi-user web app that I made to explore the power of Node.js, Express, MongoDB and npm packages. This app features secured user signup and login functions and allows logged-in users to post, edit and delete campgrounds. Users can also post, edit and delete comments for each campground. Users can give addresses to campgrounds and have their locations shown on a Google Map. This app also features beautiful images which slow it down significantly since I'm using free database and server hosts.
 * 
@@ -1414,4 +1416,9 @@ confirm_password.onkeyup = validatePassword;
  
  To see the error:
  $ heroku logs
+ ```
+ - Used mLab to hold a mongoDB
+ ```
+ mongoose.connect("mongodb://weichien711:1111@ds111336.mlab.com:11336/weichienhsu");
+
  ```
