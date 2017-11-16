@@ -1404,3 +1404,14 @@ confirm_password.onkeyup = validatePassword;
     </ul>
   </div> <!-- /.social-icons -->
  ```
+ 
+ ## Deploying to Heroku
+    - Add a start script (app.js) in package.json
+ ```
+ $ heroku login
+ $ heroku create
+ $ git push heroku master
+ 
+ To see the error:
+ $ heroku logs
+ ```

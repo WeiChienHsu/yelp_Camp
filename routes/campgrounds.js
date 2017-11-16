@@ -57,7 +57,7 @@ router.get("/new",middleware.isLoggedIn, function(req, res){
     res.render("campgrounds/new");
 });
 
-// Campgrounds SHOW - show more info about one campground
+// Campgrounds SHOW - show more ihernfo about one campground
 router.get("/:id",middleware.isLoggedIn, function(req, res){
     //find the campfround with provided ID
     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
