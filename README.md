@@ -1422,3 +1422,13 @@ confirm_password.onkeyup = validatePassword;
  mongoose.connect("mongodb://weichien711:1111@ds111336.mlab.com:11336/weichienhsu");
 
  ```
+ 
+ ## Create New environment (development database environment)
+ 
+```
+export DATABASEURL=mongodb://localhost/yelp_camp 
+```
+
+```
+mongoose.connect(process.env.databaseURL);
+```
