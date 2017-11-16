@@ -1199,7 +1199,7 @@ app.use(function(req, res, next){
 ## Connect to the Google Map
 * Get Google Maps API Key (Remember to set the security after deployment to AWS or Heroku)
 ```
-AIzaSyBq2Y6s_mWuXCIQ9PffE4RLm1YpvXG89_E
+AIzaSyBq2Y6s_mWuXCIQ9PffE4RLm1YpvXGXXXXX
 ```
 * Add Google Maps scripts to application
 ```
